@@ -4,7 +4,7 @@ from users.serializers import UserSerializer
 from department.serializers import DepartmentSerializer
 class CourseSerializer(serializers.ModelSerializer):
     # teacher = UserSerializer()
-    department = DepartmentSerializer()
+    # department = DepartmentSerializer()
     class Meta:
         model = Course
         fields = [
