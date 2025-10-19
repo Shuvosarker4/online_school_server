@@ -22,5 +22,5 @@ class User(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.first_name
+        return f"{self.first_name} by {self.email}"
 
