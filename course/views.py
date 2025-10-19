@@ -14,7 +14,7 @@ from users.serializers import SimpleStudentSerializer
 
 class CourseViewSet(ModelViewSet):
     http_method_names =['get']
-    queryset = Course.objects.all()
+    queryset = Course.objects.filter(is_active=True)
     serializer_class = CourseSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
     filterset_fields = ['department']
