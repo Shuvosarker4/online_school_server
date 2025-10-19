@@ -2,12 +2,20 @@ from rest_framework import serializers
 from .models import Enrollment
 from course.serializers import CourseSerializer
 
+
+class EnrollmentUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Enrollment
+        fields = ['id','student','course','enrolled_on','progress','is_completed','price','payment_is_complete']
+
+        read_only_fields = ['id','course', 'enrolled_on','progress','is_completed','student','price',]
+
 class EnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrollment
-        fields = ['id','student','course','enrolled_on','progress','is_completed']
+        fields = ['id','student','course','enrolled_on','progress','is_completed','price','payment_is_complete']
 
-        read_only_fields = ['id', 'enrolled_on','progress','is_completed','student']
+        read_only_fields = ['id', 'enrolled_on','progress','is_completed','student','price','payment_is_complete']
 
     def validate(self, attrs):
         user = self.context['request'].user
@@ -20,5 +28,7 @@ class EnrollmentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context['request'].user
         validated_data['student'] = user
+        validated_data['price'] = validated_data['course'].price
+        validated_data['payment_is_complete'] = False
         enroll = Enrollment.objects.create(**validated_data)
         return enroll

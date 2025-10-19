@@ -7,25 +7,36 @@ from .models import Enrollment
 from .serializers import EnrollmentSerializer
 from permission.permission import IsStudent
 from enrollment.models import Enrollment
-from enrollment.serializers import EnrollmentSerializer
-from rest_framework.permissions import IsAuthenticated
+from enrollment.serializers import EnrollmentSerializer,EnrollmentUpdateSerializer
 
 # Create your views here.
 
 class EnrollmentViewSet(ModelViewSet):
-    http_method_names =['post']
+    http_method_names =['get','post','put']
     permission_classes = [IsStudent]
-    queryset = Enrollment.objects.all()
-    serializer_class = EnrollmentSerializer
+    # serializer_class = EnrollmentSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+             return EnrollmentSerializer
+        elif self.request.method == 'POST':
+             return EnrollmentSerializer
+        elif self.request.method == 'PUT':
+             return EnrollmentUpdateSerializer
+
+    def get_queryset(self):
+        return Enrollment.objects.filter(payment_is_complete=False,student=self.request.user)
+
     
-    
+
 
 class StudentEnrollmentViewSet(ModelViewSet):
     http_method_names =['get']
     serializer_class = EnrollmentSerializer
     permission_classes = [IsStudent]
+
     def get_queryset(self):
-        return Enrollment.objects.filter(student=self.request.user)
+        return Enrollment.objects.filter(student=self.request.user,payment_is_complete=True)
     
     @action(detail=True, methods=['get'], url_path='progress')
     def progress(self, request, pk=None):

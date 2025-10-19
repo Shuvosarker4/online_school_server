@@ -9,6 +9,8 @@ class Enrollment(models.Model):
     enrolled_on = models.DateTimeField(auto_now_add=True)
     progress = models.FloatField(default=0.0)
     is_completed = models.BooleanField(default=False)
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.0)
+    payment_is_complete = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.student} enrolled in {self.course.title}"
