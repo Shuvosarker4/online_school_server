@@ -1,9 +1,14 @@
+from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import Course
+from rest_framework.decorators import action
 from .serializers import CourseSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 from permission.permission import IsTeacher
+from enrollment.models import Enrollment
+from users.serializers import SimpleStudentSerializer
 
 # Create your views here.
 
@@ -20,5 +25,19 @@ class TeacherCourseViewSet(ModelViewSet):
     # queryset = Course.objects.all()
     serializer_class = CourseSerializer
     permission_classes = [IsTeacher]
+
     def get_queryset(self):
         return Course.objects.filter(teacher=self.request.user)
+    
+    @action(detail=True, methods=['get'], url_path='students')
+    def students(self, request, pk=None):
+        try:
+            course = Course.objects.get(pk=pk, teacher=request.user)
+        except Course.DoesNotExist:
+            return Response({'detail': 'No Course Found'},
+                            status=status.HTTP_404_NOT_FOUND)
+        
+        enrollments = Enrollment.objects.filter(course=course)
+        students = [enrollment.student for enrollment in enrollments]
+        serializer =SimpleStudentSerializer(students, many=True)
+        return Response(serializer.data)
