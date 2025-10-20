@@ -8,6 +8,7 @@ class Course(models.Model):
     description = models.TextField(max_length=1000)
     department = models.ForeignKey(Department,on_delete=models.CASCADE,related_name='courses')
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='courses')
+    image = models.ImageField(upload_to='course/images',blank=True,null=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     is_active = models.BooleanField(default=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

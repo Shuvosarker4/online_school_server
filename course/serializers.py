@@ -15,6 +15,7 @@ class CourseSerializer(serializers.ModelSerializer):
             'description',
             'department',
             'teacher',
+            'image',
             'price',
             'is_active',
             'total_sales',

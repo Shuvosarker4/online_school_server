@@ -21,6 +21,8 @@ class EnrollmentViewSet(ModelViewSet):
         return EnrollmentSerializer
 
     def get_queryset(self):
+        if getattr(self, 'swagger_fake_view', False):
+            return Enrollment.objects.none()
         return Enrollment.objects.filter(payment_is_complete=False,student=self.request.user)
 
     @action(detail=True, methods=['post'], url_path='make_payment')
@@ -45,6 +47,8 @@ class StudentEnrollmentViewSet(ModelViewSet):
     permission_classes = [IsStudent]
 
     def get_queryset(self):
+        if getattr(self, 'swagger_fake_view', False):
+            return Enrollment.objects.none()
         return Enrollment.objects.filter(student=self.request.user,payment_is_complete=True)
     
     @action(detail=True, methods=['get'], url_path='progress')

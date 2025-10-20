@@ -27,6 +27,8 @@ class TeacherCourseViewSet(ModelViewSet):
     permission_classes = [IsTeacher]
 
     def get_queryset(self):
+        if getattr(self, 'swagger_fake_view', False):
+            return Course.objects.none()
         return Course.objects.filter(teacher=self.request.user)
     
     @action(detail=True, methods=['get'], url_path='students')
