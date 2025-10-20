@@ -5,6 +5,11 @@ It allows teachers to create and manage courses, students to enroll and learn, a
 
 ---
 
+## 📘 Requirement Documentation
+
+You can view the detailed system requirements and specifications here:  
+➡️ [Project Requirements (PDF)](./Online_School_requirements.pdf)
+
 ## 🚀 Features
 
 ### 👨‍🏫 For Teachers
