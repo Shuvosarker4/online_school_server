@@ -11,6 +11,7 @@ class AdminCourseSerializer(serializers.ModelSerializer):
     teacher = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.filter(role='teacher')
     )
+    image = serializers.ImageField()
 
     class Meta:
         model = Course
@@ -20,6 +21,7 @@ class AdminCourseSerializer(serializers.ModelSerializer):
             'description',
             'department',
             'teacher',
+            'image',
             'price',
             'is_active',
         ]

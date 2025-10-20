@@ -7,6 +7,7 @@ class CourseSerializer(serializers.ModelSerializer):
     # teacher = UserSerializer()
     # department = DepartmentSerializer()
     total_sales = serializers.SerializerMethodField()
+    image = serializers.ImageField()
     class Meta:
         model = Course
         fields = [
