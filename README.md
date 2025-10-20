@@ -53,7 +53,6 @@ The **Online School** platform provides an integrated environment where:
 | Layer                   | Technology                         |
 | ----------------------- | ---------------------------------- |
 | **Backend**             | Django, Django REST Framework      |
-| **Frontend**            | React.js (or Next.js if used)      |
 | **Database**            | PostgreSQL / MySQL                 |
 | **Authentication**      | JWT Authentication                 |
 | **Payment Integration** | Stripe / SSLCommerz (configurable) |
@@ -62,4 +61,45 @@ The **Online School** platform provides an integrated environment where:
 
 ---
 
-## 📂 Project Structure
+---
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Shuvosarker4/online_school_server.git
+cd online_school_server
+
+
+# 2. Create and activate a virtual environment
+
+python -m venv .school_env
+
+# Linux / Mac
+
+source .school_env/bin/activate
+
+# Windows
+
+.school_env\Scripts\activate
+
+# 3. Install dependencies
+
+pip install -r requirements.txt
+
+# 4. Apply database migrations
+
+python manage.py makemigrations
+python manage.py migrate
+
+# 5. Create a superuser (Admin)
+
+python manage.py createsuperuser
+
+# 6. Run the development server
+
+python manage.py runserver
+```
