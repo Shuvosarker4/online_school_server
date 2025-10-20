@@ -16,19 +16,19 @@ class EnrollmentViewSet(ModelViewSet):
     permission_classes = [IsStudent]
 
     def get_serializer_class(self):
-        if self.action == 'make_complete': 
+        if self.action == 'make_payment': 
             return EnrollmentUpdateSerializer
         return EnrollmentSerializer
 
     def get_queryset(self):
         return Enrollment.objects.filter(payment_is_complete=False,student=self.request.user)
 
-    @action(detail=True, methods=['post'], url_path='make_complete')
-    def make_complete(self, request, pk=None):
+    @action(detail=True, methods=['post'], url_path='make_payment')
+    def make_payment(self, request, pk=None):
         enrollment = self.get_object()
 
         # PAYMENT VERIFICATION STARTS HERE
-        # TODO 
+        # TODO
 
         enrollment.payment_is_complete = True
         enrollment.save()
