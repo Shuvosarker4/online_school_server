@@ -121,7 +121,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 **Author:** Shuvo Sarker  
 
 - 🌐 **GitHub:** [@Shuvosarker4](https://github.com/Shuvosarker4)  
-- ✉️ **Email:** [shuvoo01797451@gmail.com](mailto:shuvo01797451@gmail.com)  
+- ✉️ **Email:** [shuvo01797451@gmail.com](mailto:shuvo01797451@gmail.com)  
 - 💼 **LinkedIn:** [linkedin.com/in/shuvosarker4](https://www.linkedin.com/in/shuvosarker4/)
 - 👨‍💻 **PortFolio:** [shuvo-sarker4.vercel.app/](https://shuvo-sarker4.vercel.app/)
 
