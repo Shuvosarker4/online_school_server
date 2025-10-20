@@ -12,22 +12,31 @@ from enrollment.serializers import EnrollmentSerializer,EnrollmentUpdateSerializ
 # Create your views here.
 
 class EnrollmentViewSet(ModelViewSet):
-    http_method_names =['get','post','put']
+    http_method_names =['get','post']
     permission_classes = [IsStudent]
-    # serializer_class = EnrollmentSerializer
 
     def get_serializer_class(self):
-        if self.request.method == 'GET':
-             return EnrollmentSerializer
-        elif self.request.method == 'POST':
-             return EnrollmentSerializer
-        elif self.request.method == 'PUT':
-             return EnrollmentUpdateSerializer
+        if self.action == 'make_complete': 
+            return EnrollmentUpdateSerializer
+        return EnrollmentSerializer
 
     def get_queryset(self):
         return Enrollment.objects.filter(payment_is_complete=False,student=self.request.user)
 
-    
+    @action(detail=True, methods=['post'], url_path='make_complete')
+    def make_complete(self, request, pk=None):
+        enrollment = self.get_object()
+
+        # PAYMENT VERIFICATION STARTS HERE
+        # TODO 
+
+        enrollment.payment_is_complete = True
+        enrollment.save()
+        
+        return Response({
+            'success': True,
+            'message': 'Payment completed successfully'
+        })
 
 
 class StudentEnrollmentViewSet(ModelViewSet):

@@ -8,7 +8,7 @@ class EnrollmentUpdateSerializer(serializers.ModelSerializer):
         model = Enrollment
         fields = ['id','student','course','enrolled_on','progress','is_completed','price','payment_is_complete']
 
-        read_only_fields = ['id','course', 'enrolled_on','progress','is_completed','student','price',]
+        read_only_fields = ['id','course', 'enrolled_on','progress','is_completed','student','price','payment_is_complete']
 
 class EnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
